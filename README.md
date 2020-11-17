@@ -43,6 +43,8 @@ And the result is shown in the way of Heatmap (see the example below), where eac
 <img src="https://github.com/JSFRi/HSM-RL/blob/main/heatmap_160.png" alt="HSS" />
 </div>
 
+Folder fast_slow_tier_ansible_client/ includes codes to start fast&slow tier instances using ansible.
+
 ## Supplements
 Slides: https://drive.google.com/file/d/1ZUtKDQc8nF0HM2CJXTVQEzcWTZa2D7za/view?usp=sharing
 
