@@ -12,7 +12,11 @@ In a Hierarchical (Multi-tier) Storage System (HSS), file transfers are controll
 
 ## Methods
 
-For each storage tier, we build a RL agent to learn the cost function of this tier, and the migration policy is defined by criterion: \emph{For a file in tier i being requested, it will transferred to tier j if:}
+For each storage tier, we build a RL agent to learn the cost function of this tier, and the migration policy is defined by criterion: *For a file in tier i being requested, it will transferred to tier j if:*
+
+\begin{equation}
+
+\end{equation}
 
 
 'Workflow Chart:'
