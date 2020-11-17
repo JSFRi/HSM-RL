@@ -23,6 +23,8 @@ For each storage tier, we build a RL agent to learn the cost function of this ti
 
 For more details about the methods please look at the slides in the supplements.
 
+Folder fast_slow_tier_ansible_client/ contains the code for generating fast/slow tier instance using ansible.
+
 ## Codes
 
 Fondamental functions are in the folder Class_func/
