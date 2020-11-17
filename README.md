@@ -11,10 +11,20 @@ In a Hierarchical (Multi-tier) Storage System (HSS), file transfers are controll
 </div>
 
 ## Methods
+
+For each storage tier, we build a RL agent to learn the cost function of this tier, and the migration policy is defined by criterion: \emph{For a file in tier i being requested, it will transferred to tier j if:}
+
+
 'Workflow Chart:'
 ![image](https://github.com/JSFRi/HSM-RL/blob/main/Flow_Chart.png)
 
-## Supplement
+## Codes
+
+<div  align="center">
+<img src="https://github.com/JSFRi/HSM-RL/blob/main/heatmap_160.png" width = "300" height = "200" alt="HSS" />
+</div>
+
+## Supplements
 Slides: https://drive.google.com/file/d/1ZUtKDQc8nF0HM2CJXTVQEzcWTZa2D7za/view?usp=sharing
 
 Reference:
