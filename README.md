@@ -14,7 +14,9 @@ In a Hierarchical (Multi-tier) Storage System (HSS), file transfers are controll
 
 For each storage tier, we build a RL agent to learn the cost function of this tier, and the migration policy is defined by criterion: For a file in tier i being requested, it will transferred to tier j if:
 
-$ {C_{up}^i\cdot\tilde{s}_i^i+C_{up}^j\cdot\tilde{s}_j^i < C_{not}^i\cdot s_i^i+C_{not}^j\cdot{s}_j^i} $
+$$\frac{1}{2}$$
+
+$$ {C_{up}^i\cdot\tilde{s}_i^i+C_{up}^j\cdot\tilde{s}_j^i < C_{not}^i\cdot s_i^i+C_{not}^j\cdot{s}_j^i} $$
 
 
 'Workflow Chart:'
