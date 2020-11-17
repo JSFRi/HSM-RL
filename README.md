@@ -6,7 +6,7 @@ Online data migration policy for Hierarchical Storage System based on Reinforcem
 
 In a Hierarchical (Multi-tier) Storage System (HSS), file transfers are controlled by the Data Migration Policy, thus a well-defined policy is crucial for keeping the HSS ordered and well-performed. We use reinforcement learning knowledages to train a continuously-updating (online) migration policy
 
- <img src="https://github.com/JSFRi/HSM-RL/blob/main/HSS.png" width = "300" height = "200" alt="HSS" align=center />
+ <img src="https://github.com/JSFRi/HSM-RL/blob/main/HSS.png" style="zoom:50%" alt="HSS" />
 
 ## Content
 
