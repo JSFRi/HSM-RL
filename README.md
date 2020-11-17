@@ -1,6 +1,6 @@
 # HSM-RL Hierarchical Storage Management using Reinforcement Learning
 
-
+![image](https://github.com/JSFRi/HSM-RL/blob/main/Flow_Chart.png)
 
 Slides: https://drive.google.com/file/d/1ZUtKDQc8nF0HM2CJXTVQEzcWTZa2D7za/view?usp=sharing
 
