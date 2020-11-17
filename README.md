@@ -1,10 +1,8 @@
-# HSM-RL
+# HSM-RL Hierarchical Storage Management using Reinforcement Learning
 
-Hierarchical Storage Management using Reinforcement Learning
+
 
 Slides: https://drive.google.com/file/d/1ZUtKDQc8nF0HM2CJXTVQEzcWTZa2D7za/view?usp=sharing
-
-
 
 Reference:
 
