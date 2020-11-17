@@ -37,7 +37,7 @@ Fondamental functions are in the folder Class_func/
 
 'RL(/Rule1/Rule2/Rule3)-randinit.py' imply simulations of a system containes three tiers(fast,medium,slow) and 1000 files using policies according to RL agent(/Naive rule1/2/3), for more details please see the slides in supplements.
 
-And the result is shown in the way of Heatmap, where each block represent one file and the color of the block means the temperature of the file.
+And the result is shown in the way of Heatmap (see the example below), where each block represent one file and the color of the block means the temperature of the file.
 
 <div  align="center">
 <img src="https://github.com/JSFRi/HSM-RL/blob/main/heatmap_160.png" alt="HSS" />
