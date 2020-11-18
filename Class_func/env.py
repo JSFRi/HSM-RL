@@ -49,7 +49,10 @@ class env:
         ### s1
         s1=self.tier['temp'].mean()
         ### s2
-        s2=sum([self.tier['temp'][i]*self.tier['weight'][i] for i in self.tier.index])/len(self.tier)
+        if len(self.tier)==0:
+            s2=0
+        else:
+            s2=sum([self.tier['temp'][i]*self.tier['weight'][i] for i in self.tier.index])/len(self.tier)
         ### s3
         s3=sum(response_times)
         
