@@ -101,41 +101,19 @@ def temp_decrease(tier1,tier2,tier3,Request,timestep):
     
     req_No=list(Request.loc[Request['request']==1,'No.'])
     
-    for i in list(tier1['No.']):
-        if i in req_No:
-            tier1.loc[tier1['No.']==i,'time_untouched']=0
-        else:
-            ##increase untouched time by 1
-            tier1.loc[tier1['No.']==i,'time_untouched']+=1
-            ## decrease temp by 0.1 after $timestep times untorched
-            if int(tier1.loc[tier1['No.']==i,'time_untouched'])%timestep==0:
-                tier1.loc[tier1['No.']==i,'temp']-=0.1
-            if float(tier1.loc[tier1['No.']==i,'temp'])<0.1:
-                tier1.loc[tier1['No.']==i,'temp']=0.1
-                
-    for i in list(tier2['No.']):
-        if i in req_No:
-            tier2.loc[tier2['No.']==i,'time_untouched']=0
-        else:
-            ##increase untouched time by 1
-            tier2.loc[tier2['No.']==i,'time_untouched']+=1
-            ## decrease temp by 0.1 after $timestep times untorched
-            if int(tier2.loc[tier2['No.']==i,'time_untouched'])%timestep==0:
-                tier2.loc[tier2['No.']==i,'temp']-=0.1
-            if float(tier2.loc[tier2['No.']==i,'temp'])<0.1:
-                tier2.loc[tier2['No.']==i,'temp']=0.1
+    for tier in [tier1,tier2,tier3]:
+        for i in list(tier['No.']):
+            if i in req_No:
+                tier.loc[tier['No.']==i,'time_untouched']=0
+            else:
+                ##increase untouched time by 1
+                tier.loc[tier['No.']==i,'time_untouched']+=1
+                ## decrease temp by 0.1 after $timestep times untorched
+                if int(tier.loc[tier['No.']==i,'time_untouched'])!=0 and int(tier.loc[tier['No.']==i,'time_untouched'])%timestep==0:
+                    tier.loc[tier['No.']==i,'temp']-=0.1
+                if float(tier.loc[tier['No.']==i,'temp'])<0.1:
+                    tier.loc[tier['No.']==i,'temp']=0.1
 
-    for i in list(tier3['No.']):
-        if i in req_No:
-            tier3.loc[tier3['No.']==i,'time_untouched']=0
-        else:
-            ##increase untouched time by 1
-            tier3.loc[tier3['No.']==i,'time_untouched']+=1
-            ## decrease temp by 0.1 after $timestep times untorched
-            if int(tier3.loc[tier3['No.']==i,'time_untouched'])%timestep==0:
-                tier3.loc[tier3['No.']==i,'temp']-=0.1
-            if float(tier3.loc[tier3['No.']==i,'temp'])<0.1:
-                tier3.loc[tier3['No.']==i,'temp']=0.1
 
 ## Naturally decreasement of temp
 def temp_decrease_twotier(tier1,tier2,Request,timestep):
@@ -149,7 +127,7 @@ def temp_decrease_twotier(tier1,tier2,Request,timestep):
             ##increase untouched time by 1
             tier1.loc[tier1['No.']==i,'time_untouched']+=1
             ## decrease temp by 0.1 after $timestep times untorched
-            if int(tier1.loc[tier1['No.']==i,'time_untouched'])%timestep==0:
+            if int(tier1.loc[tier1['No.']==i,'time_untouched'])!=0 and int(tier1.loc[tier1['No.']==i,'time_untouched'])%timestep==0:
                 tier1.loc[tier1['No.']==i,'temp']-=0.1
             if float(tier1.loc[tier1['No.']==i,'temp'])<0.1:
                 tier1.loc[tier1['No.']==i,'temp']=0.1
@@ -161,7 +139,7 @@ def temp_decrease_twotier(tier1,tier2,Request,timestep):
             ##increase untouched time by 1
             tier2.loc[tier2['No.']==i,'time_untouched']+=1
             ## decrease temp by 0.1 after $timestep times untorched
-            if int(tier2.loc[tier2['No.']==i,'time_untouched'])%timestep==0:
+            if int(tier2.loc[tier2['No.']==i,'time_untouched'])!=0 and int(tier2.loc[tier2['No.']==i,'time_untouched'])%timestep==0:
                 tier2.loc[tier2['No.']==i,'temp']-=0.1
             if float(tier2.loc[tier2['No.']==i,'temp'])<0.1:
                 tier2.loc[tier2['No.']==i,'temp']=0.1
