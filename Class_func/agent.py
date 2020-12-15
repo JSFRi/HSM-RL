@@ -83,7 +83,7 @@ class TDAgent():
         # update p
         for i in range(len(self.p)):
             self.p[i]=self.p[i]+self.alpha[i]*(reward+np.exp(-self.beta*s3_not)*C_n_1-C_n)*self.z[i]
-            print(self.p[i])
+            #print(self.p[i])
 
         # return [phi^i] for phi_list
         return phi
