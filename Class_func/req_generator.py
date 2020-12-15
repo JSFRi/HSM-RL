@@ -48,7 +48,7 @@ def Req_generator_twotier(tier1,tier2):
     
     ## simulate response time according to file size
     #resp=normalization(tier['weight'])
-    resp=tier['weight']/1000000
+    resp=tier['weight']/100000
     
     return pd.DataFrame({'No.':No_list,'request':req_list,'response':resp})
 
