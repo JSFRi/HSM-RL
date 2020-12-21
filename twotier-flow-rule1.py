@@ -34,15 +34,22 @@ tier1=pd.read_csv('./info_table/table_fast_tier.csv')
 tier1['time_untouched']=0
 tier2=pd.read_csv('./info_table/table_slow_tier.csv')
 tier2['time_untouched']=0
-##Initially Store files by Rule-2
-##First put all files in slow tier
-tier2=pd.concat([tier1,tier2],ignore_index=True)
-tier1=tier1[0:0]
+##Initially Store files by Rule-1
+all_tier=pd.concat([tier1,tier2],ignore_index=True)
+sum_weight=0
+for i in range(len(all_tier)):
+    weight=all_tier['weight'][i]
+    sum_weight=sum_weight+weight
+    if sum_weight>16000000: ##80% of tier1
+        break
+tier1=all_tier[0:i].reset_index(drop=True)
+tier2=all_tier[i:].reset_index(drop=True)
 
 ##load requests
 Requests=pd.read_csv('requests_twotier.csv')
 
-## Record variables
+## record variables
+
 
 phi1s_t1_list=[0]
 phi2s_t1_list=[0]
@@ -63,8 +70,8 @@ t0=time.time()
 
 warnings.filterwarnings('ignore')
 #progress=ProgressBar()
-if os.path.exists('./Heatmap_RL_twotier_Rule2/')==False:
-    os.mkdir('./Heatmap_RL_twotier_Rule2/')
+if os.path.exists('./Heatmap_RL_twotier_Rule1/')==False:
+    os.mkdir('./Heatmap_RL_twotier_Rule1/')
 
 env1=env(tier1)
 env2=env(tier2)
@@ -130,7 +137,7 @@ for turn in range(int(100000/num_per_turn)):
         ##
         env2.add_file(file)
         env1.remove_file(file)
-    
+        
     ## Record transfer numbers    
     transfer_list_RL.append([num_t1_t2,num_t2_t1,size_t1_t2,size_t2_t1])
 
@@ -157,7 +164,7 @@ for turn in range(int(100000/num_per_turn)):
     plt.subplot(1,2,2)
     plt.title('Tier2')
     sns.heatmap(matrix_heat2,xticklabels=False, yticklabels=False,vmin=0,vmax=1,cmap="YlGnBu")
-    plt.savefig('./Heatmap_RL_twotier_Rule2/heatmap_%d.png'%turn,format='png',dpi=320)
+    plt.savefig('./Heatmap_RL_twotier_Rule1/heatmap_%d.png'%turn,format='png',dpi=320)
     #plt.show()
     plt.close()
     
@@ -173,6 +180,7 @@ for turn in range(int(100000/num_per_turn)):
     print('Downgrade %d files from fast_tier to slow_tier'%(len(no_t1_t2)))
     #gather files from nfs to slow_tier
     #slow_get_file.delay(0)
+    tier1=env1.tier
     
     #gather file numbers that should be upgraded from t2 to t1
     no_t2_t1=[]
@@ -185,14 +193,17 @@ for turn in range(int(100000/num_per_turn)):
     print('Upgrade %d files from slow_tier to fast_tier'%(len(no_t2_t1)))
     #gather files from nfs to fast_tier
     #fast_get_file.delay(0)
+    tier2=env2.tier
+    
     transfer_real_RL.append([no_t1_t2,no_t2_t1])
+        
     
     ## request_count +num_per_turn
     count+=num_per_turn
     print(count,'requests have been proceeded,','using',time.time()-t1,'seconds')
     t1=time.time()
     
-np.save('transfer_list_rule2_twotier_100000_%d.npy'%num_per_turn,np.array(transfer_list_RL))
+np.save('transfer_list_rule1_twotier_100000_%d.npy'%num_per_turn,np.array(transfer_list_RL))
 np.save('transfer_real_RL_twotier_100000_%d.npy'%num_per_turn,np.array(transfer_real_RL))
 
 pd.DataFrame({'s1t1':s1t1_list,
@@ -200,6 +211,6 @@ pd.DataFrame({'s1t1':s1t1_list,
               's3t1':s3t1_list,
               's1t2':s1t2_list,
               's2t2':s2t2_list,
-              's3t2':s3t2_list,}).to_csv('s123_RL_twotier_100000_rule2_%d.csv'%num_per_turn,index=False)
+              's3t2':s3t2_list,}).to_csv('s123_RL_twotier_100000_rule1_%d.csv'%num_per_turn,index=False)
               
 print('Complete!')

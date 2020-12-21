@@ -32,28 +32,30 @@ from worker2 import slow_move_file, slow_get_file
 ##load data
 tier1=pd.read_csv('./info_table/table_fast_tier.csv')
 tier1['time_untouched']=0
-tier1['req_time']=0
 tier2=pd.read_csv('./info_table/table_slow_tier.csv')
 tier2['time_untouched']=0
-tier2['req_time']=0
-
-##Define Rule-3 temperature function
-def hot_cold_rule3(tier,file):
-    file['req_time']+=1
-    if float(file['weight']/file['req_time'])<500000:
-        temp=random.choice(np.arange(0.6,1.01,0.1))
-        file['temp']=temp
-    tier.loc[tier['No.']==int(file['No.'])]=file
 
 ##load requests
 Requests=pd.read_csv('requests_twotier.csv')
 
-## Record variables
+## Initail parameters
+b1t1=7.33/0.4
+a1t1=np.exp(b1t1*0.8)
+b2t1=7.33/7000000
+a2t1=np.exp(b2t1*5000000)
+b3t1=7.33/70
+a3t1=np.exp(b3t1*35)
 
-phi1s_t1_list=[0]
-phi2s_t1_list=[0]
-phi1s_t2_list=[0]
-phi2s_t2_list=[0]
+b1t2=7.33/0.3
+a1t2=np.exp(b1t2*0.65)
+b2t2=7.33/1500000
+a2t2=np.exp(b2t2*3000000)
+b3t2=7.33/150
+a3t2=np.exp(b3t2*900)
+
+
+phi_t1_list=[[0]*8]
+phi_t2_list=[[0]*8]
 
 s1t1_list=[]
 s2t1_list=[]
@@ -69,11 +71,14 @@ t0=time.time()
 
 warnings.filterwarnings('ignore')
 #progress=ProgressBar()
-if os.path.exists('./Heatmap_RL_twotier_Rule3/')==False:
-    os.mkdir('./Heatmap_RL_twotier_Rule3/')
+if os.path.exists('./Heatmap_RL_twotier_100000/')==False:
+    os.mkdir('./Heatmap_RL_twotier_100000/')
 
 env1=env(tier1)
 env2=env(tier2)
+
+agent1=TDAgent(n_states=3,p_init=[0.0]*8,beta=0.05,lam=0.8,a1=a1t1,a2=a2t1,a3=a3t1,b1=b1t1,b2=b2t1,b3=b3t1)
+agent2=TDAgent(n_states=3,p_init=[0.0]*8,beta=0.05,lam=0.8,a1=a1t2,a2=a2t2,a3=a3t2,b1=b1t2,b2=b2t2,b3=b3t2)
 
 count=0
 t1=time.time()
@@ -111,10 +116,13 @@ for turn in range(int(100000/num_per_turn)):
         ## judge if need to transit to tier1
              # get file infos
             file = env2.tier.loc[env2.tier['No.']==req]
-            hot_cold_rule3(env2.tier,file)
-            ## if hot then migrate, else don't
-            file = env2.tier.loc[env2.tier['No.']==req]
-            if float(file['temp'])>0.5:
+            hot_cold(env2.tier,file)
+             # calculate c_up&c_not
+            C_not_t1, s1_not_t1, C_up_t1, s1_up_t1=agent1.c_up_c_not(env1.tier,file)
+            C_not_t2, s1_not_t2, C_up_t2, s1_up_t2=agent2.c_up_c_not(env2.tier,file)
+             # criterion
+            if C_up_t1*s1_up_t1+C_up_t2*s1_up_t2 < C_not_t1*s1_not_t1+C_not_t2*s1_not_t2:
+                # then upgrade
                 ## count transition number and volume:
                 num_t2_t1+=1
                 size_t2_t1+=float(file['weight'])
@@ -139,11 +147,22 @@ for turn in range(int(100000/num_per_turn)):
         
     ## Record transfer numbers    
     transfer_list_RL.append([num_t1_t2,num_t2_t1,size_t1_t2,size_t2_t1])
-
+        
+    ## calculate new s1,s2,s3 
+    s1t1_up,s2t1_up,s3t1_up,_=env1.step(Request)
+    s1t2_up,s2t2_up,s3t2_up,_=env2.step(Request)
+    
+    ## agent learn
+    phi_t1=agent1.learn([s1t1_not,s2t1_not,s3t1_not], reward_t1, [s1t1_up,s2t1_up,s3t1_up], phi_t1_list)
+    phi_t1_list.append(phi_t1)
+    
+    phi_t2=agent2.learn([s1t2_not,s2t2_not,s3t2_not], reward_t2, [s1t2_up,s2t2_up,s3t2_up], phi_t2_list)
+    phi_t2_list.append(phi_t2)
+    
     ##Naturally decreasement of temperatures
     temp_decrease_twotier(env1.tier,env2.tier,Request,timestep=500)
     
-    ##Settlement after each num_per_turn requests
+    ##Settlement after each 200 requests
     #if count%num_per_turn==0:
     ## Draw heatmap for each tier
     heat1=list(env1.tier['temp'])+[0]*(16-len(env1.tier['temp']))
@@ -163,7 +182,7 @@ for turn in range(int(100000/num_per_turn)):
     plt.subplot(1,2,2)
     plt.title('Tier2')
     sns.heatmap(matrix_heat2,xticklabels=False, yticklabels=False,vmin=0,vmax=1,cmap="YlGnBu")
-    plt.savefig('./Heatmap_RL_twotier_Rule3/heatmap_%d.png'%turn,format='png',dpi=320)
+    plt.savefig('./Heatmap_RL_twotier_100000/heatmap_%d.png'%turn,format='png',dpi=320)
     #plt.show()
     plt.close()
     
@@ -179,7 +198,8 @@ for turn in range(int(100000/num_per_turn)):
     print('Downgrade %d files from fast_tier to slow_tier'%(len(no_t1_t2)))
     #gather files from nfs to slow_tier
     #slow_get_file.delay(0)
-        
+    tier1=env1.tier
+    
     #gather file numbers that should be upgraded from t2 to t1
     no_t2_t1=[]
     for i in tier2['No.']:
@@ -191,6 +211,8 @@ for turn in range(int(100000/num_per_turn)):
     print('Upgrade %d files from slow_tier to fast_tier'%(len(no_t2_t1)))
     #gather files from nfs to fast_tier
     #fast_get_file.delay(0)
+    tier2=env2.tier
+    
     transfer_real_RL.append([no_t1_t2,no_t2_t1])
     
     ## request_count +num_per_turn
@@ -198,7 +220,7 @@ for turn in range(int(100000/num_per_turn)):
     print(count,'requests have been proceeded,','using',time.time()-t1,'seconds')
     t1=time.time()
      
-np.save('transfer_list_rule3_twotier_100000_%d.npy'%num_per_turn,np.array(transfer_list_RL))
+np.save('transfer_list_RL_twotier_100000_%d.npy'%num_per_turn,np.array(transfer_list_RL))
 np.save('transfer_real_RL_twotier_100000_%d.npy'%num_per_turn,np.array(transfer_real_RL))
 
 pd.DataFrame({'s1t1':s1t1_list,
@@ -206,6 +228,6 @@ pd.DataFrame({'s1t1':s1t1_list,
               's3t1':s3t1_list,
               's1t2':s1t2_list,
               's2t2':s2t2_list,
-              's3t2':s3t2_list,}).to_csv('s123_RL_twotier_100000_rule3_%d.csv'%num_per_turn,index=False)
+              's3t2':s3t2_list,}).to_csv('s123_RL_twotier_100000_%d.csv'%num_per_turn,index=False)
               
 print('Complete!')
