@@ -213,7 +213,7 @@ for turn in range(int(100000/num_per_turn)):
     #fast_get_file.delay(0)
     tier2=env2.tier
     
-    transfer_real_RL.append([no_t1_t2,no_t2_t1])
+    transfer_real_RL.append([len(no_t1_t2),len(no_t2_t1)])
     
     ## request_count +num_per_turn
     count+=num_per_turn

@@ -195,7 +195,7 @@ for turn in range(int(100000/num_per_turn)):
     #fast_get_file.delay(0)
     tier2=env2.tier
     
-    transfer_real_RL.append([no_t1_t2,no_t2_t1])
+    transfer_real_RL.append([len(no_t1_t2),len(no_t2_t1)])
         
     
     ## request_count +num_per_turn
@@ -204,7 +204,7 @@ for turn in range(int(100000/num_per_turn)):
     t1=time.time()
     
 np.save('transfer_list_rule1_twotier_100000_%d.npy'%num_per_turn,np.array(transfer_list_RL))
-np.save('transfer_real_RL_twotier_100000_%d.npy'%num_per_turn,np.array(transfer_real_RL))
+np.save('transfer_real_rule1_twotier_100000_%d.npy'%num_per_turn,np.array(transfer_real_RL))
 
 pd.DataFrame({'s1t1':s1t1_list,
               's2t1':s2t1_list,
