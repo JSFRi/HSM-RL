@@ -33,11 +33,12 @@ Fondamental functions are in the folder Class_func/
 
 'req_generator.py' defines requests generators that used to generate simulated requested
 
-'RL(/Rule1/Rule2/Rule3)-randinit.py' imply simulations of a system containes three tiers(fast,medium,slow) and 1000 files using policies according to RL agent(/Naive rule1/2/3), for more details please see the slides in supplements.
+Folder simu_experiments/ contains implementations of simulations of a system containes three tiers(fast,medium,slow) and 1000 files using RL-based policies and rule-based policies. Corresponding with the section 7.A in the article.
 
 Folder fast_slow_tier_ansible_client/ includes codes to start fast&slow tier instances using ansible.
 
 ## Supplements
 Slides: https://drive.google.com/file/d/1ZUtKDQc8nF0HM2CJXTVQEzcWTZa2D7za/view?usp=sharing
+
 Article: arxiv.....
 
