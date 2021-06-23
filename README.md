@@ -18,10 +18,10 @@ For each storage tier, we build a RL agent to learn the cost function of this ti
 <a href="https://www.codecogs.com/eqnedit.php?latex=C_{up}^i\cdot\tilde{s}_i^i&plus;C_{up}^j\cdot\tilde{s}_j^i&space;<&space;C_{not}^i\cdot&space;s_i^i&plus;C_{not}^j\cdot{s}_j^i" target="_blank"><img src="https://latex.codecogs.com/gif.latex?C_{up}^i\cdot\tilde{s}_i^i&plus;C_{up}^j\cdot\tilde{s}_j^i&space;<&space;C_{not}^i\cdot&space;s_i^i&plus;C_{not}^j\cdot{s}_j^i" title="C_{up}^i\cdot\tilde{s}_i^i+C_{up}^j\cdot\tilde{s}_j^i < C_{not}^i\cdot s_i^i+C_{not}^j\cdot{s}_j^i" /></a>
 </div>
 
+Then the cost functions are updated continually by TD-lambda algortihm
 
-For more details about the methods please look at the slides in the supplements.
+For more details about the methods please look at the referance article.
 
-Folder fast_slow_tier_ansible_client/ contains the code for generating fast/slow tier instance using ansible.
 
 ## Codes
 
@@ -45,7 +45,5 @@ Folder fast_slow_tier_ansible_client/ includes codes to start fast&slow tier ins
 
 ## Supplements
 Slides: https://drive.google.com/file/d/1ZUtKDQc8nF0HM2CJXTVQEzcWTZa2D7za/view?usp=sharing
+Article: arxiv.....
 
-Reference:
-
-Vengerov, D. A reinforcement learning framework for online data migration in hierarchical storage systems. J Supercomput 43, 1–19 (2008). https://doi.org/10.1007/s11227-007-0135-3
