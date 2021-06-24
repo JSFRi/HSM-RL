@@ -37,7 +37,7 @@ Folder simu_experiments/ contains implementations of simulations of a system con
 
 Folder ansible_client/ includes codes to start different tier instances using ansible.
 
-Folder simu_experiments/ contains implementations experiments on cloud-distributed system using RL-based policies and rule-based policies. Corresponding with the section 7.B in the article.
+Folder cloud_experiments/ contains implementations experiments on cloud-distributed system using RL-based policies and rule-based policies. Corresponding with the section 7.B in the article.
 
 ## Supplements
 Slides: https://drive.google.com/file/d/1ZUtKDQc8nF0HM2CJXTVQEzcWTZa2D7za/view?usp=sharing
