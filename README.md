@@ -35,7 +35,9 @@ Fondamental functions are in the folder Class_func/
 
 Folder simu_experiments/ contains implementations of simulations of a system containes three tiers(fast,medium,slow) and 1000 files using RL-based policies and rule-based policies. Corresponding with the section 7.A in the article.
 
-Folder fast_slow_tier_ansible_client/ includes codes to start fast&slow tier instances using ansible.
+Folder ansible_client/ includes codes to start different tier instances using ansible.
+
+Folder simu_experiments/ contains implementations experiments on cloud-distributed system using RL-based policies and rule-based policies. Corresponding with the section 7.B in the article.
 
 ## Supplements
 Slides: https://drive.google.com/file/d/1ZUtKDQc8nF0HM2CJXTVQEzcWTZa2D7za/view?usp=sharing
