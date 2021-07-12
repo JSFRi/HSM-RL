@@ -1,0 +1,12 @@
+#cloud-config
+
+users:
+ - name: appuser
+   sudo: ALL=(ALL) NOPASSWD:ALL
+   home: /home/appuser
+   shell: /bin/bash
+   ssh_authorized_keys:
+     - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC31qePdkgA2MUYOU27220iHGWMK6wMWSKpDlaohC0mHlh/bNhjR4puv5v+GaCVvtxXlI1vE56F9kjdTBG3RezVwHyrKxEcLXXhJUY5VnMI7YTsEzpr6wFjHNUGHQzdHNkVnyguNvgrK5hlApHYwrSffzYwRMJrHKoLadDNO9tZBxEauIkn0N4gP47mVkUEMZcXh2R4xvezXgDCnSi7hwL4dP7lRdhP0h7DBvMTNnx4xNGkFNVZs6ng51X7R5ALpB7pIlRaMZs7aCsmIfd9yFJa+oEZeh/zYSQHL02it+YLyI/Gyt9W3q/HKHwdZNJb/e9pqInV1g+mlW60Bk8D/N33mKbogJSrzkBfQSeNZQGAi6PDBtr33s3h7MeK6kuN1b/jk1EKuQXC/fYXKRa9+xzMUxsGUD55rhNeoEJFzidRGKzaNg9i0eQ9VOfEtu2WXVp7oKPR2mTKM+Op/M7CnlAt2LzCVNE6vTx5TNe6Utc2Pk13cQFwsbLwmV98NVD5LgU= ubuntu@tz
+
+byobu_default: system
+
