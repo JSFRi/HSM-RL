@@ -33,14 +33,14 @@ Fondamental functions are in the folder Class_func/
 
 'req_generator.py' defines requests generators that used to generate simulated requested
 
-Folder simu_experiments/ contains implementations of simulations of a system containes three tiers(fast,medium,slow) and 1000 files using RL-based policies and rule-based policies. Corresponding with the section 7.A in the article.
+Folder simu_experiments/ contains implementations of simulations of a system containes three tiers(fast,medium,slow) and 1000 files using RL-based policies and rule-based policies. Corresponding with the section 6.1 in the article.
 
 Folder ansible_client/ includes codes to start different tier instances using ansible.
 
-Folder cloud_experiments/ contains implementations experiments on cloud-distributed system using RL-based policies and rule-based policies. Corresponding with the section 7.B in the article.
+Folder cloud_experiments/ contains implementations experiments on cloud-distributed system using RL-based policies and rule-based policies. Corresponding with the section 6.2 in the article.
 
 ## Supplements
-Slides: https://drive.google.com/file/d/1ZUtKDQc8nF0HM2CJXTVQEzcWTZa2D7za/view?usp=sharing
+Slides: 
 
-Article: arxiv.....
+Article: 
 
