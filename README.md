@@ -40,7 +40,7 @@ Folder ansible_client/ includes codes to start different tier instances using an
 Folder cloud_experiments/ contains implementations experiments on cloud-distributed system using RL-based policies and rule-based policies. Corresponding with the section 6.2 in the article.
 
 ## Supplements
-Slides: 
+Video Animations about how file distirbutions change over timesteps: see MP4 files named 'Heatmaps_xxx.mp4'
 
 Article: 
 
