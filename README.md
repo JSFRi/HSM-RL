@@ -36,5 +36,6 @@ Folder cloud_experiments/ contains implementations experiments on cloud-distribu
 ## Supplements
 Video Animations about how file distirbutions change over timesteps: see MP4 files named 'Heatmaps_xxx.mp4'
 
-Reference: T. Zhang, A. Hellander and S. Toor, "Efficient Hierarchical Storage Management Empowered by Reinforcement Learning," in IEEE Transactions on Knowledge and Data Engineering, doi: [10.1109/TKDE.2022.3176753](https://doi.org/10.1109/TKDE.2022.3176753).
+## Reference
+T. Zhang, A. Hellander and S. Toor, "Efficient Hierarchical Storage Management Empowered by Reinforcement Learning," in IEEE Transactions on Knowledge and Data Engineering, doi: [10.1109/TKDE.2022.3176753](https://doi.org/10.1109/TKDE.2022.3176753).
 
