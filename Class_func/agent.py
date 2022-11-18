@@ -103,7 +103,7 @@ class TDAgent():
                 s2_not=sum([tier['temp'][i]*tier['weight'][i] for i in tier.index])/len(tier)
                 ### s3_not of tier(not)
                 response_times=list(requested['response'])
-                s3_not=sum(response_times)/len(response_times)
+                s3_not=sum(response_times)
                 #s3_not=0
             ### C_not
             C_not,_=self.cost_phi([s1_not,s2_not,s3_not])
@@ -124,7 +124,7 @@ class TDAgent():
                 if len(response_times)==0:
                     s3_up=0
                 else:
-                    s3_up=sum(response_times)/len(response_times)
+                    s3_up=sum(response_times)
                 #s3_up=0
             ### C_up
             C_up,_=self.cost_phi([s1_up,s2_up,s3_up])
@@ -144,7 +144,7 @@ class TDAgent():
                 if len(response_times)==0:
                     s3_not=0
                 else:
-                    s3_not=sum(response_times)/len(response_times)
+                    s3_not=sum(response_times)
                 #s3_not=0
             ### C_not
             C_not,_=self.cost_phi([s1_not,s2_not,s3_not])
@@ -163,7 +163,7 @@ class TDAgent():
                 request_file=requestsDF.loc[requestsDF['request']==1].loc[requestsDF['No.']==fileNo]
                 requested_up=pd.concat([requested,request_file],ignore_index=True)
                 response_times=list(requested_up['response'])
-                s3_up=sum(response_times)/len(response_times)
+                s3_up=sum(response_times)
                 #s3_up=0
             ### C_up
             C_up,_=self.cost_phi([s1_up,s2_up,s3_up])
