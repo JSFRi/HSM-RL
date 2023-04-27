@@ -1,0 +1,27 @@
+#cloud-config
+
+apt_update: true
+apt_upgrade: true
+packages:
+ - python3-pip
+ - python3-dev
+ - build-essential
+ - rabbitmq-server
+
+byobu_default: system 
+
+runcmd:
+ - pip3 install celery
+ - pip3 install tensorflow==2.10.0
+ - pip3 install amqp
+ - pip3 install flask
+ - pip3 install future
+ - pip3 install numpy
+ - pip3 install pandas
+ - pip3 install matplotlib
+ - pip3 install seaborn
+ - pip3 install io
+
+ - git clone https://github.com/JSFRi/HSM-RL.git 
+ - celery --workdir=/production_server -A workerA worker --detach --loglevel=debug --concurrency=1 -n wkr1@backend
+ - python3 /production_server/app.py --host=0.0.0.0 --port=5100 & 
