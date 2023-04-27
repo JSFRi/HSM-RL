@@ -10,7 +10,7 @@ In a Hierarchical (Multi-tier) Storage System (HSS), file transfers are controll
 <img src="https://github.com/JSFRi/HSM-RL/blob/main/HSS.png" width = "300" height = "200" alt="HSS" />
 </div>
 
-The entire theory and algorithm are explained in the article.
+The entire theory and algorithm are explained in the [article](https://doi.org/10.1109/TKDE.2022.3176753).
 
 ## Codes
 
@@ -36,5 +36,6 @@ Folder cloud_experiments/ contains implementations experiments on cloud-distribu
 ## Supplements
 Video Animations about how file distirbutions change over timesteps: see MP4 files named 'Heatmaps_xxx.mp4'
 
-Article: 
+## Reference
+T. Zhang, A. Hellander and S. Toor, "Efficient Hierarchical Storage Management Empowered by Reinforcement Learning," in IEEE Transactions on Knowledge and Data Engineering, doi: [10.1109/TKDE.2022.3176753](https://doi.org/10.1109/TKDE.2022.3176753).
 

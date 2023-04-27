@@ -80,6 +80,7 @@ class env:
         
 ## Temp switch func for file being requested
 #@numba.jit(nopython=True)
+'''
 def hot_cold(tier,file):
     if float(file['temp'])>0.5:
         if random.random()<0.005:
@@ -95,6 +96,27 @@ def hot_cold(tier,file):
             tier.loc[tier['No.']==int(file['No.'])]=file
         else:
             pass
+'''
+
+def hot_cold(tier,file):
+    tier.loc[tier['No.']==int(file['No.']),'req_time']+=1
+    file=tier.loc[tier['No.']==int(file['No.'])]
+    ## weight/request_time as probability ratio
+    ratio=1-1.8/(1+np.exp(5000*7.33/10000)*np.exp(-(7.33/10000)*float(file['weight']/file['req_time'])))
+    
+    ##if file is cold, change it to hot according to the weight/req_time ratio
+    if float(file['temp'])<0.5:
+        if random.random()<ratio:
+            temp=1-0.5/np.exp(0.01*file['req_time'])
+            file['temp']=temp
+            tier.loc[tier['No.']==int(file['No.'])]=file
+        else:
+            pass
+     ##if the file is hot, increase temperatue by requests time
+    else:
+        temp=1-0.5/np.exp(0.01*file['req_time'])
+        file['temp']=temp
+        tier.loc[tier['No.']==int(file['No.'])]=file
 
 ## Naturally decreasement of temp
 def temp_decrease(tier1,tier2,tier3,Request,timestep):
