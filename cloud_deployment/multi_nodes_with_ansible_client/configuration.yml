@@ -22,8 +22,8 @@
    - name: Download git repository
      become: true
      git:
-      repo: 'https://github.com/sztoor/model_serving.git'
-      dest: /model_serving 
+      repo: 'https://github.com/JSFRi/HSM-RL'
+      dest: /HSM-RL
       
    - name: Change ownership of a directory
      become: true

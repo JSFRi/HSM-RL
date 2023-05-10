@@ -12,9 +12,9 @@ def add_nums(a, b):
    return a + b
 
 @celery.task()
-def slow_move_file(i):
+def mid_move_file(i):
    os.system('mv /home/appuser/medium_tier/%d.txt /home/appuser/nfs/'%i)
 
 @celery.task()
-def slow_get_file(i):
+def mid_get_file(i):
    os.syetem('mv /home/appuser/nfs/* /home/appuser/medium_tier/')
