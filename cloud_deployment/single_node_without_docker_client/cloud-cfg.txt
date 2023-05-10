@@ -20,7 +20,6 @@ runcmd:
  - pip3 install pandas
  - pip3 install matplotlib
  - pip3 install seaborn
- - pip3 install io
 
  - git clone https://github.com/JSFRi/HSM-RL.git 
  - celery --workdir=/HSM-RL/production_server -A workerA worker --detach --loglevel=debug --concurrency=1 -n wkr1@backend
