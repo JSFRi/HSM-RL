@@ -1,5 +1,3 @@
-from workerA import add_nums, get_accuracy, get_predictions
-
 from flask import (
    Flask,
    request,
@@ -24,9 +22,9 @@ import matplotlib.pyplot as plt
 import io
 
 #Data imports
-Tier1 = pd.read_csv("/home/ubuntu/HSM-RL/cloud_deployment/tier1.csv")
-Tier2 = pd.read_csv("/home/ubuntu/HSM-RL/cloud_deployment/tier2.csv")
-Tier3 = pd.read_csv("/home/ubuntu/HSM-RL/cloud_deployment/tier3.csv")
+Tier1 = pd.read_csv("./tier1.csv")
+Tier2 = pd.read_csv("./tier2.csv")
+Tier3 = pd.read_csv("./tier3.csv")
 
 #app = Flask(__name__, template_folder='./templates',static_folder='./static')
 app = Flask(__name__)
@@ -39,7 +37,7 @@ def index():
 #Pandas Page
 @app.route('/')
 @app.route('/pandas', methods=("POST", "GET"))
-def Tier3():
+def Tier():
     return render_template('pandas.html',
                            PageTitle = "Pandas",
                            table=[Tier3.to_html(classes='data', index = False)], titles= Tier3.columns.values)
