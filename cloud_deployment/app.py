@@ -77,7 +77,7 @@ def create_figure():
     for i in range(len(heat3)//32):
         matrix_heat3.append(heat3[32*i:(32*i+32)])
     
-    fig=plt.figure(1,figsize=(12,4), dpi=320)
+    fig=plt.figure(1,figsize=(6,3), dpi=320)
     plt.subplot(1,3,1)
     plt.title('Tier1')
     sns.heatmap(matrix_heat1,xticklabels=False, yticklabels=False,vmin=0,vmax=1,cmap="Reds")
