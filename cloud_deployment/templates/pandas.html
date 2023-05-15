@@ -5,7 +5,8 @@
 
 <body>
     <h1>File distribution tables</h1>
-    {% for table in table %} 
+    {% for table in table %}
+	{{titles[loop.index]}}
     {{ table|safe }} 
     {% endfor %}
 </body>

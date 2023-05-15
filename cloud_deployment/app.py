@@ -41,9 +41,9 @@ def index():
 def Tier():
     return render_template('pandas.html',
                            PageTitle = "Pandas",
-                           table=[Tier3.to_html(classes='data', columns=[1:], index = False), 
-                                  Tier2.to_html(classes='data', columns=[1:], index = False),
-                                  Tier1.to_html(classes='data', columns=[1:], index = False)], titles= ['Tier3','Tier2','Tier1'])
+                           table=[Tier3.to_html(classes='data', index = False), 
+                                  Tier2.to_html(classes='data', index = False),
+                                  Tier1.to_html(classes='data', index = False)], titles= ['Tier3','Tier2','Tier1'])
 
 
 #Matplotlib page
