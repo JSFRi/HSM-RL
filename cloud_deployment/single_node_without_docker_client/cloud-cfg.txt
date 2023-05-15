@@ -22,5 +22,5 @@ runcmd:
  - pip3 install seaborn
 
  - git clone https://github.com/JSFRi/HSM-RL.git 
- - celery --workdir=/HSM-RL/production_server -A workerA worker --detach --loglevel=debug --concurrency=1 -n wkr1@backend
- - python3 /HSM-RL/production_server/app.py --host=0.0.0.0 --port=5100 & 
+ - celery --workdir=/HSM-RL/cloud_deployment -A workerA worker --detach --loglevel=debug --concurrency=1 -n wkr1@backend
+ - python3 /HSM-RL/cloud_deployment/app.py --host=0.0.0.0 --port=5100 & 
