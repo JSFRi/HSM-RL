@@ -41,9 +41,9 @@ def index():
 def Tier():
     return render_template('pandas.html',
                            PageTitle = "Pandas",
-                           table=[Tier3.to_html(classes='data', index = False), 
-                                  Tier2.to_html(classes='data', index = False),
-                                  Tier1.to_html(classes='data', index = False)], titles= ['Tier3','Tier2','Tier1'])
+                           table=[Tier3.to_html(classes='data', columns=[1:], index = False), 
+                                  Tier2.to_html(classes='data', columns=[1:], index = False),
+                                  Tier1.to_html(classes='data', columns=[1:], index = False)], titles= ['Tier3','Tier2','Tier1'])
 
 
 #Matplotlib page
@@ -77,7 +77,7 @@ def create_figure():
     for i in range(len(heat3)//32):
         matrix_heat3.append(heat3[32*i:(32*i+32)])
     
-    fig=plt.figure(1,figsize=(6,3), dpi=320)
+    fig=plt.figure(1,figsize=(4,2), dpi=320)
     plt.subplot(1,3,1)
     plt.title('Tier1')
     sns.heatmap(matrix_heat1,xticklabels=False, yticklabels=False,vmin=0,vmax=1,cmap="Reds")
